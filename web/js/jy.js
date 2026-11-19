@@ -58,7 +58,6 @@ const PAGES = ["import", "export", "ofx"];
 function goto(page) {
   if (!PAGES.includes(page)) page = "import";
   if (page === "ofx") refreshOfx();
-  $("ptStatusWrap").hidden = page !== "import";
   PAGES.forEach((p) => {
     $("page-" + p).classList.toggle("on", p === page);
     $("tab-" + p).classList.toggle("on", p === page);
@@ -252,18 +251,6 @@ function pendingSubmit() {
   exportRun(answers);
 }
 
-/* ── 状态轮询（PTSL） ── */
-async function pollStatus() {
-  if (!api() || !$("page-import").classList.contains("on") || state.busy) return;
-  try {
-    const r = await api().pt_status();
-    $("ptDot").classList.toggle("off", !r.online);
-    $("ptDot").classList.toggle("on", !!r.online);
-    $("ptText").textContent = r.online ? "Pro Tools 在线（PTSL）" : "Pro Tools 未连接";
-  } catch (e) {}
-}
-
-
 /* Conditional options and parse invalidation: never export an old parameter snapshot. */
 function syncWorkflow() {
   const busy = state.busy || state.ofxBusy;
@@ -382,12 +369,9 @@ async function init() {
     state.bridgeLoaded=true;
     
     await loadExportCfg();
-    pollStatus();
-    setInterval(pollStatus, 10000);
     log("✓ 工具已就绪", "ok");
   } else {
     $("demoTip").style.display = "";
-    $("ptText").textContent = "PTSL —（演示态不探测）";
     setTimeout(() => log("提示：浏览器演示态——导入/导出需在壳内运行（python shell/jy_desktop.py）", "info"), 200);
   }
   window.dispatchEvent(new Event('toolready'));

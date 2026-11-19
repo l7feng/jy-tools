@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN" data-mode="dark" data-style="glass">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>JY Tools</title>
-<link rel="icon" href="assets/logos/j.ico"><link rel="stylesheet" href="assets/style.css"><link rel="stylesheet" href="assets/rename-apple.css"><link rel="stylesheet" href="assets/jy-workbench.css"></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>剪映工程工具</title>
+<link rel="icon" href="assets/icons/jy/app.ico"><link rel="stylesheet" href="assets/style.css"><link rel="stylesheet" href="assets/rename-apple.css"><link rel="stylesheet" href="assets/jy-workbench.css"></head>
 <body class="re-apple-ui jy-calm-ui">
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
-<header class="hero"><img class="logo brand-mark" src="assets/logos/j.png" alt=""><h1>JY Tools</h1><span class="ver">v4.3.1</span><div class="spacer"></div><button type="button" class="mode-sw" id="modeSw">主题 · <span id="modeLabel">中性灰（深）</span></button></header>
+<header class="hero"><img class="logo brand-mark" src="assets/branding/brand.png" alt="JY Tools"><div class="spacer"></div><button type="button" class="mode-sw" id="modeSw">主题 · <span id="modeLabel">中性灰（深）</span></button></header>
 <nav class="tabs naming-nav" aria-label="工具导航"><button type="button" class="tab on" id="tab-import">导入音频</button><button type="button" class="tab" id="tab-export">导出音频</button><span class="nav-gap spacer"></span><button type="button" class="tab auxiliary" id="tab-ofx">管理 OFX</button></nav>
 <main>
 <div class="task-status" id="taskStatus" role="status" aria-live="polite">就绪，选择一项操作。</div>
@@ -44,7 +44,7 @@
 <section class="card jy-plugin-section"><div class="jy-section-head"><h2>已安装的缓存副本 <span class="tag" id="ofxCount">0 个</span></h2><button class="btn ghost sm" id="btnOfxRefresh">刷新列表</button></div><div id="ofxList" class="jy-plugin-list"><div class="empty">正在读取插件缓存…</div></div><details class="jy-help"><summary>安装位置与使用说明</summary><p id="ofxRoot" class="jy-path"></p><button class="btn ghost sm" id="btnOfxOpenRoot">打开缓存目录</button><p>安装和删除前请保存并完全退出剪映。导入只复制插件，不运行插件代码；重启剪映后确认插件是否显示。若未显示，请使用剪映原生导入。</p><p>删除移入回收站，不删除源插件。已有工程中的对应效果可能提示缺失。</p></details></section></section>
 <details class="logwrap jy-run-details" id="runDetails"><summary class="loghead"><b>运行记录</b><span class="cnt" id="logCnt">（0 条）</span></summary><div class="log" id="log"><div class="info">就绪。</div></div><div class="log-actions"><button class="btn ghost sm" id="btnClear">清空记录</button></div></details>
 </main>
-<footer class="status"><span id="ptStatusWrap"><span class="dot off" id="ptDot"></span><span id="ptText">Pro Tools 状态未检测</span></span><div class="spacer"></div><span class="badge" id="envBadge">环境未检</span></footer>
+<footer class="status"><div class="spacer"></div><span class="status-version">剪映工程工具 | v4.3.2</span><span class="badge" id="envBadge">环境未检</span></footer>
 <dialog id="ofxDeleteDialog" aria-labelledby="ofxDeleteTitle"><h2 id="ofxDeleteTitle">移除插件？</h2><p id="ofxDeleteName"></p><p id="ofxDeletePath" class="jy-path"></p><p id="ofxDeleteSize" class="note"></p><p class="note">仅移除剪映缓存副本并移入回收站。已有工程中的该效果可能提示缺失。</p><div class="action-toolbar"><button class="btn ghost" id="ofxDeleteCancel">取消</button><button class="btn danger" id="ofxDeleteConfirm">移入回收站</button></div></dialog>
 <div class="demo-tip" id="demoTip" style="display:none">浏览器预览 · 文件操作请使用 EXE</div>
 <script src="js/i18n.js"></script><script src="js/preferences.js"></script><script src="js/jy.js"></script><script src="js/glass-tuner.js"></script>

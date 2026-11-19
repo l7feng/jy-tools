@@ -68,7 +68,7 @@
   }
   document.documentElement.lang=language;document.documentElement.dataset.language=language;
   const tool=location.pathname.endsWith('re.html')?'re':location.pathname.endsWith('jy.html')?'jy':'pt';
-  const names={pt:['Pro Tools 工具箱','Pro Tools Toolkit'],jy:['JY Tools','JY Tools'],re:['Rename Project','Rename Project']};
+  const names={pt:['Pro Tools 工具箱','Pro Tools Toolkit'],jy:['剪映工程工具','JY Tools'],re:['统一命名归位','Rename Project']};
   document.title=names[tool][language==='en'?1:0];
  }
  const pending=new Set();

@@ -11,6 +11,14 @@ import os
 import sys
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 
+
+class _NoReuseHTTPServer(ThreadingHTTPServer):
+    # 关闭 SO_REUSEADDR：Windows 默认复用会让第二个进程静默绑定同一端口，
+    # 掩盖端口争用，请求被分到僵死的旧后端（ERR_EMPTY_RESPONSE）。
+    # 端口被占时必须抛 OSError(errno 10048)，触发下面的 +1 自愈到空闲端口。
+    allow_reuse_address = False
+
+
 WEB_DIR = (os.path.join(sys._MEIPASS, "web") if getattr(sys, "frozen", False)
            else os.environ.get("PT_WEB_ROOT", os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "web"))))
 DEFAULT_PORT = 26789          # settlement-tool 占 26788，错开
@@ -22,7 +30,7 @@ def make_server(port: int = DEFAULT_PORT):
     last_err: Exception | None = None
     for p in range(port, port + MAX_RETRY):
         try:
-            srv = ThreadingHTTPServer(("127.0.0.1", p), handler)
+            srv = _NoReuseHTTPServer(("127.0.0.1", p), handler)
             srv.port = p
             return srv
         except OSError as exc:          # 端口占用 → +1 自愈
